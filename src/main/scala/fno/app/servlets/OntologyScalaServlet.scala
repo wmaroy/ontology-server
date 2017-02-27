@@ -17,7 +17,6 @@ class OntologyScalaServlet extends OntologyserverStack {
   get("/functions/:function") {
 
     val function = params("function")
-    println("[ONTOLOGY LOG] Executing " + function)
 
     val result = function match {
       case "simpleProperty" => simplePropertyFunction
@@ -53,8 +52,6 @@ class OntologyScalaServlet extends OntologyserverStack {
       fn.execute()
     } catch {
       case ex : Exception =>
-        println("[EXCEPTION] Could not execute a lat function")
-        println("Message: " + ex.printStackTrace())
         Seq()
     }
 
@@ -79,8 +76,6 @@ class OntologyScalaServlet extends OntologyserverStack {
       fn.execute()
     } catch {
       case ex : Exception =>
-        println("[EXCEPTION] Could not execute a lon function")
-        println("Message: " + ex.printStackTrace())
         Seq()
     }
 
@@ -101,7 +96,6 @@ class OntologyScalaServlet extends OntologyserverStack {
       Seq(fn.execute())
     } catch {
       case ex : Exception =>
-        println("[EXCEPTION] Could not execute a startDate function")
         Seq()
     }
 
@@ -121,7 +115,6 @@ class OntologyScalaServlet extends OntologyserverStack {
       Seq(fn.execute())
     } catch {
       case ex : Exception =>
-        println("[EXCEPTION] Could not execute an endDate function")
         Seq()
     }
 
@@ -142,7 +135,6 @@ class OntologyScalaServlet extends OntologyserverStack {
       Seq(fn.execute().toString)
     } catch {
       case ex : Exception =>
-        println("[EXCEPTION] Could not execute a contains function")
         Seq()
     }
 
@@ -163,7 +155,6 @@ class OntologyScalaServlet extends OntologyserverStack {
       Seq(fn.execute().toString)
     } catch {
       case ex : Exception =>
-        println("[EXCEPTION] Could not execute an isSet function")
         Seq()
     }
 
@@ -184,7 +175,6 @@ class OntologyScalaServlet extends OntologyserverStack {
       Seq(fn.execute().toString)
     } catch {
       case ex : Exception =>
-        println("[EXCEPTION] Could not execute an equals function")
         Seq()
     }
 
@@ -212,7 +202,6 @@ class OntologyScalaServlet extends OntologyserverStack {
       fn.execute()
     } catch {
       case ex : Exception =>
-        println("[EXCEPTION] Could not execute a simple property mapping")
         Seq()
     }
 
