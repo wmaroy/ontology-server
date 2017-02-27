@@ -1,10 +1,14 @@
 # # Scala and sbt Dockerfile 
 # # https://github.com/hseeberger/scala-sbt 
 
+
+
 # # Pull base image 
 FROM openjdk:8 
 ENV SCALA_VERSION 2.12.1 
 ENV SBT_VERSION 0.13.13 
+
+EXPOSE 8080
 
 # Scala expects this file 
 RUN touch /usr/lib/jvm/java-8-openjdk-amd64/release
@@ -25,8 +29,12 @@ RUN \
   apt-get install sbt && \
   sbt sbtVersion
 
+
+# Clones the ontology server from the github repository
+RUN git clone https://github.com/wmaroy/ontology-server
+
 # Define working directory 
-WORKDIR /root
+WORKDIR /ontology-server
 
-  
-
+# Starts the server (default is port 8080)
+CMD ./sbt jetty:start jetty:join
