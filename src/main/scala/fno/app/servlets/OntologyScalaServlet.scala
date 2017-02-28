@@ -150,8 +150,9 @@ class OntologyScalaServlet extends OntologyserverStack {
 
     val property = getParam("property")
 
+
     val seq = try {
-      val fn = new IsSetFunction(property)
+      val fn = if(property != null) new IsSetFunction(property) else new IsSetFunction("null") // this is a hack :(
       Seq(fn.execute().toString)
     } catch {
       case ex : Exception =>

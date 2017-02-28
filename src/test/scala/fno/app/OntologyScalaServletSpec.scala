@@ -13,7 +13,7 @@ class OntologyScalaServletSpec extends ScalatraSpec {
 
   addServlet(classOf[OntologyScalaServlet], "/*")
 
-  def root200 = get("/") {
+  def root200 = get("http://localhost:8080/functions/isSetFunction?property=null") {
     status must_== 200
   }
 }
