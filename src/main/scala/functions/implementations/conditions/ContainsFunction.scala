@@ -11,7 +11,8 @@ import functions.Function
 class ContainsFunction(property : String, value : String) extends Function {
 
   def execute(): Boolean = {
-    property.contains(value)
+    if(property != null) property.contains(value)
+    else false
   }
 
 }
