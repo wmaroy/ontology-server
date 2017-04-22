@@ -37,4 +37,14 @@ class ContainsFunctionTest extends FlatSpec with Matchers {
 
   }
 
+  "A ContainsFunction " should "return false if a property is null" in {
+
+    val property = null
+    val value = "Microsoft"
+
+    val fn = new ContainsFunction(property, value)
+    fn.execute() should be (false)
+
+  }
+
 }

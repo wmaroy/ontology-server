@@ -102,6 +102,40 @@ class SimplePropertyFunctionTest extends FlatSpec with Matchers {
 
   }
 
+  "Programming languages" should "be parsed correctly" in {
+    val property = "prog_language=[[Java (programming language)|Java]], [[C (programming language)|C]], [[C++]], [[COBOL]], [[PL/I]], [[HLASM]], [[FORTRAN]], [[REXX]], and many others"
+    val select = null
+    val prefix = null
+    val suffix = null
+    val transform = null
+    val factor = 1.0
+    val datatype =  "programmingLanguage"
+    val unit = null
+
+    val fn = new SimplePropertyFunction(property, select, prefix, suffix,transform , factor, datatype, unit)
+    val result = fn.execute()
+
+    result.head should be ("http://en.dbpedia.org/resource/Java_(programming_language)")
+
+  }
+
+  "A state" should "be parsed correctly" in {
+    val property = "state1=Sichuan"
+    val select = null
+    val prefix = null
+    val suffix = null
+    val transform = null
+    val factor = 1.0
+    val datatype =  "state"
+    val unit = null
+
+    val fn = new SimplePropertyFunction(property, select, prefix, suffix,transform , factor, datatype, unit)
+    val result = fn.execute()
+
+    result.head should be ("Sichuan")
+
+  }
+
 
 
 }

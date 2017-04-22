@@ -4,6 +4,7 @@ import dbpedia.dataparsers.ontology.OntologySingleton
 import functions._
 import functions.implementations._
 import functions.implementations.conditions.{ContainsFunction, EqualsFunction, IsSetFunction}
+import functions.implementations.core.{ExtractDateFunction, ExtractEntityFunction, ExtractStringFunction}
 import functions.implementations.date.{EndDateFunction, StartDateFunction}
 import functions.implementations.geocoordinate.{LatFunction, LonFunction}
 import play.api.libs.json.{JsArray, JsObject, JsString, JsValue}
@@ -27,12 +28,67 @@ class OntologyScalaServlet extends OntologyserverStack {
       case "containsFunction" => containsFunction
       case "isSetFunction" => isSetFunction
       case "equalsFunction" => equalsFunction
+      case "extract-date" => extractDate
+      case "extract-string" => extractString
+      case "extract-entity" => extractEntity
     }
 
     val JsSeq = result.map(x => JsString(x))
     val resultJson : JsValue = JsArray(JsSeq)
     resultJson.toString()
 
+  }
+
+  /**
+    * Extracts a date from a property
+    * @return
+    */
+  private def extractDate : Seq[String] = {
+    val property = getParam("property")
+    val dateDatatype = getParam("datedatatype")
+    val fn = new ExtractDateFunction
+
+    val seq = try {
+      fn.execute(property, dateDatatype)
+    } catch {
+      case ex: Exception => Seq()
+    }
+
+    seq
+  }
+
+  /**
+    * Extracts a string from a property
+    * @return
+    */
+  private def extractString : Seq[String] = {
+    val property = getParam("property")
+    val fn = new ExtractStringFunction
+
+    val seq = try {
+      fn.execute(property)
+    } catch {
+      case ex: Exception => Seq()
+    }
+
+    seq
+  }
+
+  /**
+    * Extracts a string from a property
+    * @return
+    */
+  private def extractEntity : Seq[String] = {
+    val property = getParam("property")
+    val fn = new ExtractEntityFunction
+
+    val seq = try {
+      fn.execute(property)
+    } catch {
+      case ex: Exception => Seq()
+    }
+
+    seq
   }
 
   /**
